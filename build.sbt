@@ -11,7 +11,9 @@ libraryDependencies ++= {
   val scalaTestV  = "2.2.5"
   Seq(
     "com.typesafe.akka" %% "akka-actor"                           % akkaV,
-    "com.typesafe.akka" %% "akka-stream-experimental_2.11"        % akkaStreamV,
+    "com.typesafe.akka" %% "akka-http-experimental"               % akkaStreamV,
+    "com.typesafe.akka" %% "akka-stream-experimental"             % akkaStreamV,
+    "com.typesafe.akka" %% "akka-http-xml-experimental"           % akkaStreamV,
     "org.scalatest"     %% "scalatest"                            % scalaTestV % "test"
   )
 }
