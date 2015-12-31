@@ -16,7 +16,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %% "akka-http-xml-experimental"         % akkaStreamV,
     "com.typesafe.akka"   %% "akka-http-spray-json-experimental"  % akkaStreamV,
     "com.typesafe.slick"  %% "slick"                              % "3.1.1",
-    "org.slf4j"           %% "slf4j-nop"                          % "1.7.13",
+    "org.slf4j"           %  "slf4j-nop"                          % "1.7.13",
+    "com.h2database"      %  "h2"                                 % "1.4.190",
     "org.scalatest"       %% "scalatest"                          % scalaTestV % "test"
   )
 }
