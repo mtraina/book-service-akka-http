@@ -14,7 +14,7 @@ class TablesSuite extends FunSuite with BeforeAndAfter with ScalaFutures {
 
   def createSchema() = db.run(books.schema.create).futureValue
 
-  def insertBooks(): Int =
+  def insertBook(): Int =
     db.run(books += (1, "978-1853260629", "War and Peace", "Leo Tolstoy", 1024)).futureValue
 
   before { db = Database.forConfig("h2mem1") }
@@ -26,6 +26,13 @@ class TablesSuite extends FunSuite with BeforeAndAfter with ScalaFutures {
 
     assert(tables.size == 1)
     assert(tables.count(_.name.name.equalsIgnoreCase("books")) == 1)
+  }
+
+  test("should insert a book"){
+    createSchema()
+
+    val insertCount = insertBook()
+    assert(insertCount == 1)
   }
 
   after { db.close }
