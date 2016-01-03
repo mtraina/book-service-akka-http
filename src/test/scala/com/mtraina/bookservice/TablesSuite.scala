@@ -44,11 +44,20 @@ class TablesSuite extends FunSuite with BeforeAndAfter with ScalaFutures {
     createSchema()
     insertBook()
 
-    val results = db.run(books.result).futureValue
-    assert(results.size == 1)
-    assert(results.head.id == 1)
+    val action = books.result
+    val results: Future[Seq[Book]] = db.run(action)
+    val allBooks = results.futureValue
+    assert(allBooks.size === 1)
+    assert(allBooks.head.isbn === "978-1853260629")
+  }
+
+  test("should select the book with id 1"){
+    createSchema()
+    insertBook()
+
+    val book = db.run(books.filter(_.id === 1).map(_.title).result.head).futureValue
+    assert(book === "War and Peace")
   }
 
   after { db.close }
-
 }
