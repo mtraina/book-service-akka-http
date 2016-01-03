@@ -1,17 +1,16 @@
 package com.mtraina.bookservice
 
 import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.time.{Millis, Seconds, Span}
+import org.scalatest.time.{Millis, Span}
 import org.scalatest.{BeforeAndAfter, FunSuite}
 import slick.driver.H2Driver.api._
 import slick.jdbc.meta.MTable
 import slick.lifted.TableQuery
 
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class TablesSuite extends FunSuite with BeforeAndAfter with ScalaFutures {
-  implicit val defaultPatience = PatienceConfig(timeout = Span(5, Seconds), interval = Span(500, Millis))
+  implicit val defaultPatience = PatienceConfig(timeout = Span(300, Millis), interval = Span(30, Millis))
 
   val books = TableQuery[Books]
 
