@@ -40,13 +40,13 @@ class TablesSuite extends FunSuite with BeforeAndAfter with ScalaFutures {
     assert(insertCount == 1)
   }
 
-  test("should select a book by id"){
+  test("should select all the books"){
     createSchema()
     insertBook()
 
-    val action = books.result
-    val results: Future[Seq[Book]] = db.run(action)
-    results.foreach( println )
+    val results = db.run(books.result).futureValue
+    assert(results.size == 1)
+    assert(results.head.id == 1)
   }
 
   after { db.close }
