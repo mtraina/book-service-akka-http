@@ -1,6 +1,6 @@
 name         := "book-service-akka-http"
 organization := "com.mtraina"
-version      := "0.0.2"
+version      := "0.0.3"
 scalaVersion := "2.11.7"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
