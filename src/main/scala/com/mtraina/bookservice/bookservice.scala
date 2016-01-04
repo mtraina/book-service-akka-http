@@ -8,8 +8,6 @@ import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import spray.json.DefaultJsonProtocol
 
-final case class Item(id: Long, name: String)
-
 trait JsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val bookFormat = jsonFormat5(Book)
 }
