@@ -18,6 +18,7 @@ libraryDependencies ++= {
     "com.typesafe.slick"  %% "slick"                              % "3.1.1",
     "org.slf4j"           %  "slf4j-nop"                          % "1.7.13",
     "com.h2database"      %  "h2"                                 % "1.4.190",
-    "org.scalatest"       %% "scalatest"                          % scalaTestV % "test"
+    "org.scalatest"       %% "scalatest"                          % scalaTestV  % "test",
+    "com.typesafe.akka"   %% "akka-http-testkit-experimental"     % "2.0-M2" % "test"
   )
 }
