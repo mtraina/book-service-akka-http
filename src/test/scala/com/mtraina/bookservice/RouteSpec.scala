@@ -13,9 +13,15 @@ class RouteSpec extends WordSpec with Matchers with ScalatestRouteTest with Serv
         }
       }
 
-      "return id and isbn passed as parameters" in {
+      "return id and isbn passed as query parameters" in {
         Get("/query_params?id=1&isbn=2") ~> route ~> check {
           responseAs[String] shouldEqual "id: 1 and isbn: 2"
+        }
+      }
+
+      "return the id passed as path parameter" in {
+        Get("/path_params/1") ~> route ~> check {
+          responseAs[String] shouldEqual "id: 1"
         }
       }
 
