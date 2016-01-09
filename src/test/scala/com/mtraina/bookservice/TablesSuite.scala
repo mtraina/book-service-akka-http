@@ -21,7 +21,7 @@ class TablesSuite extends FunSuite with BeforeAndAfter with ScalaFutures {
   def insertBook(): Int =
     db.run(books += Book(1, "978-1853260629", "War and Peace", "Leo Tolstoy", 1024)).futureValue
 
-  before { db = Database.forConfig("h2mem1") }
+  before { db = Database.forConfig("h2memTest") }
 
   test("should create the schema"){
     createSchema()
