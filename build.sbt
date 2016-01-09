@@ -1,6 +1,6 @@
 name         := "book-service-akka-http"
 organization := "com.mtraina"
-version      := "0.0.3"
+version      := "0.0.4"
 scalaVersion := "2.11.7"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
@@ -19,6 +19,6 @@ libraryDependencies ++= {
     "org.slf4j"           %  "slf4j-nop"                          % "1.7.13",
     "com.h2database"      %  "h2"                                 % "1.4.190",
     "org.scalatest"       %% "scalatest"                          % scalaTestV  % "test",
-    "com.typesafe.akka"   %% "akka-http-testkit-experimental"     % "2.0-M2" % "test"
+    "com.typesafe.akka"   %% "akka-http-testkit-experimental"     % akkaStreamV % "test"
   )
 }

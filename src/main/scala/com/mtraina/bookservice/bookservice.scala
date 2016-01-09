@@ -12,7 +12,9 @@ trait JsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val bookFormat = jsonFormat5(Book)
 }
 
-trait Service {
+trait Service extends JsonSupport {
+  val persistence = new Persistence
+
   val route =
     path(""){
       get {
@@ -21,32 +23,36 @@ trait Service {
         }
       }
     } ~
-      path("books"){
-        get {
-          parameterMap { params =>
-            def paramString(param: (String, String)): String = s"""${param._1} = '${param._2}'"""
-            complete(s"The parameters are ${params.map(paramString).mkString(", ")}")
-          }
-          //        complete {
-          //          persistence.book()
-          //        }
-        }
-      } ~
-      pathPrefix("balls") {
-        pathEnd {
-          complete("all balls!")
-        } ~
-          path(IntNumber) { int =>
-            complete(if (int % 2 == 0) "even ball" else "odd ball")
-          }
+    path("query_params"){
+      parameters('id, 'isbn) { (id, isbn) =>
+        complete(s"id: $id and isbn: $isbn")
       }
+    } ~
+    pathPrefix("path_params"){
+      path(IntNumber) { id =>
+        complete(s"id: $id")
+      }
+    } ~
+    path("books"){
+      get {
+        complete {
+          persistence.book()
+        }
+      }
+    } ~
+    pathPrefix("balls") {
+      pathEnd {
+        complete("all balls!")
+      } ~
+        path(IntNumber) { int =>
+          complete(if (int % 2 == 0) "even ball" else "odd ball")
+        }
+    }
 }
 
-object Boot extends App with JsonSupport with Service {
+object Boot extends App with Service {
   implicit val system = ActorSystem("book-service-system")
   implicit val materializer = ActorMaterializer()
-
-  val persistence = new Persistence
 
   val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
 
